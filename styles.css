@@ -51,6 +51,7 @@ body{
 
 #level-navigation {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
@@ -61,6 +62,12 @@ body{
     font-size: 18px;
     font-weight: bold;
 
+}
+
+#levels-text {
+    display: flex;
+    gap: 4px;
+    align-items: center;
 }
 
 .level-arrow {
@@ -82,12 +89,12 @@ body{
 #code-area{
     background-color: whitesmoke;
     direction: ltr;
-    height:fit-content;
     position: relative;
     padding: 20px;
     background-color: rgb(241, 192, 200);;
     border-radius: 4px;
-    overflow: hidden;
+    width: 350px;
+    
 }
 
 #editor {
@@ -106,7 +113,9 @@ body{
 }
 
 #user-code{
-    height: fit-content;
+    height: 120px;
+    width: 100%;
+    padding: 10px;
 }
 
 #board i {
@@ -116,8 +125,6 @@ body{
 
 #game-board{
     display: flex;
-    align-items: center;
-    flex-direction: column;
     background-color: rgba(255, 0, 157, 0.671);
     height: 50vh;
     width: 40vw;

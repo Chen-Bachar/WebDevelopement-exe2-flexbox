@@ -17,21 +17,22 @@
             </h1>
             
             <div id="level-navigation">
-                <button class="level-arrow">
+                <button class="level-arrow" id="right-arrow">
                     <
                 </button>
-                <span>
-                    שלב 1 מתוך 6
+                <span id="levels-text">
+                    <span>שלב</span>
+                    <span id="current-level">1</span>
+                    <span>מתוך</span>
+                    <span id="total-levels">7</span>
                 </span>
-                <button class="level-arrow">
+                <button class="level-arrow" id="left-arrow">
                     >
                 </button>
             </div>
             <div id="game-board"> 
-                <i class="bi bi-heart"></i>
                 <i class="bi bi-star"></i>
-                <i id="player" class="bi bi-person-fill"></i>
-
+                <i class="bi bi-person-fill"></i>
             </div>
         </div>
         <div id="side-bar">
@@ -43,7 +44,7 @@
                 יש להשתמש בפקודות הflexbox על מנת לעבור לשלב הבא
             </h5>
             <p id="level-instructions">
-                הוראות לפעול.........
+                סדרו את כל הפריטים בשורה, כך שיהיו ממורכזים במרכז הלוח.
             </p>
         </div>
         <div id="user-input">
@@ -68,5 +69,6 @@
             
         </div>
         </div>
+    <script src="game.js"></script>
     </body>
 </html>
