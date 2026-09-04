@@ -8,8 +8,13 @@ const levelInstructions = document.getElementById("level-instructions");
 const userCode = document.getElementById("user-code");
 const nextButton = document.getElementById("next");
 const message = document.getElementById("message");
+const countTrials = document.getElementById("count-trials");
 const successMessage = "כל הכבוד! עברת את השלב!";
 const errorMessage = "לא עברת את השלב, נסה שוב";
+const trials = [0, 0, 0, 0, 0, 0, 0];
+
+
+updateIcons(3);
 
 //FUNCTIONS
 function getLevelInstructions(level)
@@ -55,6 +60,8 @@ function getLevelInstructions(level)
             break;
         }
     }
+    countTrials.textContent = trials[level-1];
+
 }
 
 function parseCSS(code) {
@@ -116,7 +123,7 @@ function checkLevelSolution(level)
         }
         case(5):
         {
-            success = (styles["flex-direction"] === "row" && styles["justify-content"] === "center" && styles["align-content"] === "center" && styles["flex-wrap"] === "wrap");
+            success = (styles["flex-direction"] === "row" && styles["justify-content"] === "center" && styles["align-"] === "center" && styles["flex-wrap"] === "wrap");
             break;
         }
         case(6):
@@ -151,6 +158,8 @@ function checkLevelSolution(level)
         }, 2000);
         setTimeout(resetBoard, 2000);
     }
+    trials[level-1]++;
+    countTrials.textContent=trials[level-1];
 }
 
 function getNextLevel()
