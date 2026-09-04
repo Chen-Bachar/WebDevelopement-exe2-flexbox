@@ -7,7 +7,9 @@ const totalLevels = document.getElementById("total-levels");
 const levelInstructions = document.getElementById("level-instructions");
 const userCode = document.getElementById("user-code");
 const nextButton = document.getElementById("next");
-
+const message = document.getElementById("message");
+const successMessage = "כל הכבוד! עברת את השלב!";
+const errorMessage = "לא עברת את השלב, נסה שוב";
 
 //FUNCTIONS
 function getLevelInstructions(level)
@@ -36,12 +38,12 @@ function getLevelInstructions(level)
         }
         case(5):
         {
-            levelInstructions.textContent = "סדרו את הפריטים בשורות. כאשר אין מספיק מקום בשורה, העבירו את הפריטים לשורה הבאה. מרכזו את הפריטים הן לאורך השורות והן לאורך הלוח.";
+            levelInstructions.textContent = "סדרו את הפריטים בשורות. כאשר אין מספיק מקום בשורה, העבירו את הפריטים לשורה הבאה. מרכזו את הפריטים למרכז הלוח.";
             break;
         }
         case(6):
         {
-            levelInstructions.textContent = "סדרו את הפריטים בעמודה, עם מרווח שווה ביניהם, מרכזו אותם לרוחב, והעבירו את הפריטים לשורות חדשות כאשר אין מספיק מקום.";
+            levelInstructions.textContent = "סדרו את הפריטים בעמודה, עם מרווח שווה ביניהם, מרכזו אותם לרוחב, והעבירו את הפריטים לעמודות חדשות כאשר אין מספיק מקום.";
             break;
         }
         case(7):
@@ -72,142 +74,115 @@ function parseCSS(code) {
 function resetBoard()
 {
     board.style.cssText = "display: flex;";
-    userCode.value = "";
-    
+    userCode.value = "";   
+}
+
+function updateIcons(numberOfIcons) {
+
+    board.innerHTML = "";
+    for (let i = 0; i < numberOfIcons; i++) {
+        const icon = document.createElement("i");
+        icon.classList.add("bi", "bi-emoji-smile");
+        board.appendChild(icon);
+    }
 }
 
 function checkLevelSolution(level)
 {
     const code = userCode.value;
     const styles = parseCSS(code);
+    let success = false;
     switch(Number(level))
     {
         case(1):
         {
-            if (styles["flex-direction"] === "row" && styles["justify-content"] === "center" && styles["align-items"] === "center") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות"); 
-                setTimeout(resetBoard, 2000);              
-            }
+            success = (styles["flex-direction"] === "row" && styles["justify-content"] === "center" && styles["align-items"] === "center");
             break;
         }
         case(2):
         {
-            if (styles["flex-direction"] === "column" && styles["justify-content"] === "flex-end" && styles["align-items"] === "center") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות");   
-                setTimeout(resetBoard, 2000);            
-            }
+            success = (styles["flex-direction"] === "column" && styles["justify-content"] === "flex-end" && styles["align-items"] === "center");
             break;
         }
         case(3):
         {
-            if (styles["flex-direction"] === "row" && styles["justify-content"] === "space-between" && styles["align-items"] === "flex-end") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות");  
-                setTimeout(resetBoard, 2000);             
-            }
+            success = (styles["flex-direction"] === "row" && styles["justify-content"] === "space-between" && styles["align-items"] === "flex-end");
             break;
         }
         case(4):
         {
-            if (styles["flex-direction"] === "column" && styles["justify-content"] === "space-around" && styles["align-items"] === "center") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות");  
-                setTimeout(resetBoard, 2000);             
-            }
+            success = (styles["flex-direction"] === "column" && styles["justify-content"] === "space-around" && styles["align-items"] === "center");
             break;
         }
         case(5):
         {
-            if (styles["flex-direction"] === "row" && styles["justify-content"] === "center" && styles["align-items"] === "center" && styles["flex-wrap"] === "wrap") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות");  
-                setTimeout(resetBoard, 2000);             
-            }
+            success = (styles["flex-direction"] === "row" && styles["justify-content"] === "center" && styles["align-content"] === "center" && styles["flex-wrap"] === "wrap");
             break;
         }
         case(6):
         {
-            if (styles["flex-direction"] === "column" && styles["justify-content"] === "space-around" && styles["align-items"] === "center" && styles["flex-wrap"] === "wrap") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות");  
-                setTimeout(resetBoard, 2000);             
-            }
+            success = (styles["flex-direction"] === "column" && styles["justify-content"] === "space-around" && styles["align-items"] === "center" && styles["flex-wrap"] === "wrap");
             break;
         }
         case(7):
         {
-            if (styles["flex-direction"] === "column" && styles["justify-content"] === "space-between" && styles["align-items"] === "center") 
-            {
-                console.log("נכון!");
-                setTimeout(resetBoard, 2000);
-                setTimeout(getNextLevel, 2000);
-            }
-            else
-            {
-                console.log("טעות"); 
-                setTimeout(resetBoard, 2000);              
-            }
+            success = (styles["flex-direction"] === "column" && styles["justify-content"] === "space-between" && styles["align-items"] === "center");
             break;
         }
         default:
         {
+            setTimeout(resetBoard, 2000); 
             break;
         }
+    }
+    if (success)
+    {
+        message.textContent = successMessage;
+        setTimeout(function() {
+            message.textContent = "";
+        }, 2000);
+        setTimeout(getNextLevel, 2000);
+    }
+    else
+    {
+        message.textContent = errorMessage;
+        setTimeout(function() {
+            message.textContent = "";
+        }, 2000);
+        setTimeout(resetBoard, 2000);
     }
 }
 
 function getNextLevel()
 {
-    if(Number(currentLevel.textContent) < Number(totalLevels.textContent))
-        currentLevel.textContent = Number(currentLevel.textContent) + 1;
-    getLevelInstructions(currentLevel.textContent);
-
+    resetBoard();
+    let currentLevelNum = Number(currentLevel.textContent);
+    if(currentLevelNum < Number(totalLevels.textContent))
+    {
+        currentLevel.textContent = currentLevelNum + 1;
+        currentLevelNum++;
+    }
+    getLevelInstructions(currentLevelNum);
+    if (currentLevelNum == 5 || currentLevelNum == 6)
+        updateIcons(13);
+    else
+        updateIcons(3);
 }
 
 function getPrevLevel()
 {
-    if(Number(currentLevel.textContent) > 1)
-        currentLevel.textContent = Number(currentLevel.textContent) - 1;
-    getLevelInstructions(currentLevel.textContent);
-
+    resetBoard();
+    let currentLevelNum = Number(currentLevel.textContent);
+    if(currentLevelNum > 1)
+    {
+        currentLevel.textContent = currentLevelNum - 1;
+        currentLevelNum--;
+    }
+    getLevelInstructions(currentLevelNum);
+    if (currentLevelNum == 5 || currentLevelNum == 6)
+        updateIcons(13);
+    else
+        updateIcons(3);
 }
 
 //EVENT LISTENERS
