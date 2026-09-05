@@ -93,11 +93,12 @@ function parseCSS(code)
 function resetBoard()
 {
     board.style.cssText = "";
+    userCode.value = ""; 
     if (Number(currentLevel.textContent) == 5 || Number(currentLevel.textContent) == 6)
     {
         board.style.justifyContent = "center";
     }
-    userCode.value = "";   
+      
 }
 
 function updateIcons(numberOfIcons) 
