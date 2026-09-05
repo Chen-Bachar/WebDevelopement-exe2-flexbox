@@ -25,6 +25,7 @@ const trials = [0, 0, 0, 0, 0, 0, 0];
 
 prevArrow.disabled = true;
 updateIcons(3);
+resetBoard();
 
 //FUNCTIONS
 function getLevelInstructions(level)
