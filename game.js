@@ -1,29 +1,29 @@
 //QUERY SELECTORS
-const board = document.getElementById("game-board");
-const nextArrow = document.getElementById("left-arrow");
-const prevArrow = document.getElementById("right-arrow");
-const currentLevel = document.getElementById("current-level"); 
-const totalLevels = document.getElementById("total-levels"); 
-const levelInstructions = document.getElementById("level-instructions");
-const userCode = document.getElementById("user-code");
-const nextButton = document.getElementById("next");
-const message = document.getElementById("message");
-const countTrials = document.getElementById("count-trials");
-const resetButton = document.getElementById("reset");
+const board = document.querySelector("#game-board");
+const nextArrow = document.querySelector("#left-arrow");
+const prevArrow = document.querySelector("#right-arrow");
+const currentLevel = document.querySelector("#current-level"); 
+const totalLevels = document.querySelector("#total-levels"); 
+const levelInstructions = document.querySelector("#level-instructions");
+const userCode = document.querySelector("#user-code");
+const nextButton = document.querySelector("#next");
+const message = document.querySelector("#message");
+const countTrials = document.querySelector("#count-trials");
+const resetButton = document.querySelector("#reset");
+const levelButtons = [document.querySelector("#level1"),
+                      document.querySelector("#level2"), 
+                      document.querySelector("#level3"),
+                      document.querySelector("#level4"),
+                      document.querySelector("#level5"),
+                      document.querySelector("#level6"),
+                      document.querySelector("#level7")
+                    ]
+
 
 
 const successMessage = "כל הכבוד! עברת את השלב!";
 const errorMessage = "לא עברת את השלב, נסה שוב";
 const trials = [0, 0, 0, 0, 0, 0, 0];
-const levelButtons = [document.getElementById("level1"),
-                      document.getElementById("level2"), 
-                      document.getElementById("level3"),
-                      document.getElementById("level4"),
-                      document.getElementById("level5"),
-                      document.getElementById("level6"),
-                      document.getElementById("level7")
-                    ]
-
 
 updateIcons(3);
 
@@ -92,10 +92,10 @@ function parseCSS(code)
 
 function resetBoard()
 {
-    board.style.cssText = "display: flex;";
+    board.style.cssText = "";
     if (Number(currentLevel.textContent) == 5 || Number(currentLevel.textContent) == 6)
     {
-        board.style.cssText += "justify-content: center";
+        board.style.justifyContent = "center";
     }
     userCode.value = "";   
 }
@@ -188,13 +188,13 @@ function getNumOfIcons()
 
 function getLevel(level)
 {
-    resetBoard();
     currentLevel.textContent = level;
+    resetBoard();
     getLevelInstructions(level);
     if (level == 5 || level == 6)
     {
         updateIcons(getNumOfIcons());
-        board.style.cssText += "justify-content: center";
+        board.style.justifyContent = "center";
     }
     else
         updateIcons(3);
@@ -228,6 +228,11 @@ function nextButtonClick()
 
 function adaptUserCode()
 {
+    board.style.cssText = "";
+    if (Number(currentLevel.textContent) == 5 || Number(currentLevel.textContent) == 6)
+    {
+        board.style.justifyContent = "center";
+    }
     const styles = parseCSS(userCode.value);
     for (const property in styles) {
         board.style.setProperty(property, styles[property]);
