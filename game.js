@@ -19,12 +19,11 @@ const levelButtons = [document.querySelector("#level1"),
                       document.querySelector("#level7")
                     ]
 
-
-
 const successMessage = "כל הכבוד! עברת את השלב!";
 const errorMessage = "לא עברת את השלב, נסה שוב";
 const trials = [0, 0, 0, 0, 0, 0, 0];
 
+prevArrow.disabled = true;
 updateIcons(3);
 
 //FUNCTIONS
@@ -59,7 +58,7 @@ function getLevelInstructions(level)
         }
         case(6):
         {
-            levelInstructions.textContent = "סדרו את הפריטים בעמודה, עם מרווח שווה ביניהם, מרכזו אותם לרוחב, והעבירו את הפריטים לעמודות חדשות כאשר אין מספיק מקום.";
+            levelInstructions.textContent = "סדרו את הפריטים בעמודה, עם מרווח שווה סביב כל אחד, מרכזו אותם לרוחב, והעבירו את הפריטים לעמודות חדשות כשאין מספיק מקום.";
             break;
         }
         case(7):
@@ -198,6 +197,14 @@ function getLevel(level)
     }
     else
         updateIcons(3);
+    if(level == 7)
+        nextArrow.disabled = true;
+    else
+        nextArrow.disabled = false;
+    if(level == 1)
+        prevArrow.disabled = true;
+    else
+        prevArrow.disabled = false;
 }
 
 function getNextLevel()
@@ -208,6 +215,8 @@ function getNextLevel()
         currentLevelNum++;
         getLevel(currentLevelNum);
     }
+    else
+        resetBoard();
 }
 
 function getPrevLevel()
@@ -218,6 +227,8 @@ function getPrevLevel()
         currentLevelNum--;
         getLevel(currentLevelNum);
     }
+    else
+        resetBoard();
 }
 
 function nextButtonClick()
