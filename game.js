@@ -195,7 +195,6 @@ function getLevel(level)
     if (level == 5 || level == 6)
     {
         updateIcons(getNumOfIcons());
-        board.style.justifyContent = "center";
     }
     else
         updateIcons(3);
