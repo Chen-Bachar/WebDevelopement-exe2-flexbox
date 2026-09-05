@@ -94,6 +94,11 @@ function resetBoard()
 {
     board.style.cssText = "";
     userCode.value = ""; 
+    startLevelGameBoardSet();   
+}
+
+function startLevelGameBoardSet()
+{
     currentLevelNum = Number(currentLevel.textContent);
     if (currentLevelNum == 5 || currentLevelNum == 6)
     {
@@ -107,7 +112,6 @@ function resetBoard()
     {
         board.style.flexDirection = "row";
     }
-      
 }
 
 function updateIcons(numberOfIcons) 
@@ -149,7 +153,7 @@ function checkLevelSolution(level)
         }
         case(5):
         {
-            success = ((styles["flex-direction"] === "row" || !styles["flex-direction"]) && styles["justify-content"] === "center" && styles["align-content"] === "center" && styles["flex-wrap"] === "wrap");
+            success = ((styles["flex-direction"] === "row" || !styles["flex-direction"]) && styles["align-content"] === "center" && styles["flex-wrap"] === "wrap");
             break;
         }
         case(6):
@@ -199,7 +203,7 @@ function getNumOfIcons()
 function getLevel(level)
 {
     currentLevel.textContent = level;
-    
+    resetBoard();
     if (level == 5 || level == 6)
     {
         updateIcons(getNumOfIcons());
@@ -214,7 +218,7 @@ function getLevel(level)
         prevArrow.disabled = true;
     else
         prevArrow.disabled = false;
-    resetBoard();
+    //resetBoard();
     getLevelInstructions(level);
 }
 
@@ -251,10 +255,7 @@ function nextButtonClick()
 function adaptUserCode()
 {
     board.style.cssText = "";
-    if (Number(currentLevel.textContent) == 5 || Number(currentLevel.textContent) == 6)
-    {
-        board.style.justifyContent = "center";
-    }
+    startLevelGameBoardSet();
     const styles = parseCSS(userCode.value);
     for (const property in styles) {
         board.style.setProperty(property, styles[property]);
